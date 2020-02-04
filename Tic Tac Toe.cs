@@ -36,6 +36,16 @@ namespace Tic_Tac_Toe
 			this.Close();
 		}
 
+		static void ExtractRowAndColumn()
+		{
+
+		}
+
+		static void UpdateThe2DArray()
+		{
+
+		}
+
 		private void ButtonClicked(object sender, EventArgs e)
 		{
 			// Cast object to picturebox
@@ -57,15 +67,12 @@ namespace Tic_Tac_Toe
 
 		private void msNewGame_Click(object sender, EventArgs e)
 		{
-			
 			// Enable first turn
 			turn = true;
-			
 
 			// Reset count
 			turn_count = 0;
 
-		
 			// Clearing and reseting each picture box. 
 			picBox1.Image = null;
 			picBox2.Image = null;

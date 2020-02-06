@@ -10,20 +10,18 @@ using System.Windows.Forms;
 
 namespace Tic_Tac_Toe
 {
-/* Name: Reggie Telemaque
- * Date: 01/19/2020
- * 
- * Program: Tic Tac Toe
- * 
- * Purpose: A tic tac toe program that takes user input and changes pictureboxes corresponding to the users choice.
- */
+	/* Name: Reggie Telemaque
+	 * Date: 01/19/2020
+	 * 
+	 * Program: Tic Tac Toe
+	 * 
+	 * Purpose: A tic tac toe program that takes user input and changes pictureboxes corresponding to the users choice.
+	 */
 	public partial class TicTacToe : Form
 	{
 		// WHen true = x turn; false = y turn
 		bool turn = true;
 
-		// Count user input to declare winner
-		int turn_count = 0;
 
 		public TicTacToe()
 		{
@@ -34,6 +32,11 @@ namespace Tic_Tac_Toe
 		{
 			// Close the program on click.
 			this.Close();
+		}
+		
+		private Bitmap SetImage()
+		{
+			return (turn) ? Properties.Resources.X : Properties.Resources.O;
 		}
 
 		static void ExtractRowAndColumn()
@@ -53,49 +56,53 @@ namespace Tic_Tac_Toe
 
 			// Declare if to cooresponding turn to change between O and X/
 			if (turn)
-				button.Image = Properties.Resources.X;
+				button.Image = SetImage();
 			else
-				button.Image = Properties.Resources.O;
+				button.Image = SetImage();
 
 			// Disable button after being clicked.
 			button.Enabled = false;
-			
-			
+
+
+			int rowTag = int.Parse(button.Tag.ToString().Substring(1, 1));
+			int columnTag = int.Parse(button.Tag.ToString().Substring(3, 1));
+
 			// Flip turn
 			turn = !turn;
 		}
 
-		private void msNewGame_Click(object sender, EventArgs e)
+		private void MassSetPictureBoxEnable(bool howToSet)
 		{
-			// Enable first turn
-			turn = true;
-
-			// Reset count
-			turn_count = 0;
-
-			// Clearing and reseting each picture box. 
-			picBox1.Image = null;
-			picBox2.Image = null;
-			picBox3.Image = null;
-			picBox4.Image = null;
-			picBox5.Image = null;
-			picBox6.Image = null;
-			picBox7.Image = null;
-			picBox8.Image = null;
-			picBox9.Image = null;
-
-			// Enabling the picture boxes to be clicked.
-			picBox1.Enabled = true;
-			picBox2.Enabled = true;
-			picBox3.Enabled = true;
-			picBox4.Enabled = true;
-			picBox5.Enabled = true;
-			picBox6.Enabled = true;
-			picBox7.Enabled = true;
-			picBox8.Enabled = true;
-			picBox9.Enabled = true;
-			
+			foreach (Control controlUsed in Controls)
+			{
+				if (controlUsed is PictureBox) controlUsed.Enabled = howToSet;
+			}
 		}
+
+		private void MassSetPictureBoxImage()
+		{
+			foreach (Control controlUsed in Controls)
+				{
+				if (controlUsed is PictureBox)
+				{
+					((PictureBox)controlUsed).Image = null;
+				}
+			}
+		
+
 	}
+	private void msNewGame_Click(object sender, EventArgs e)
+	{
+		// Enable first turn
+		turn = true;
+
+		
+		MassSetPictureBoxEnable(true);
+
+		MassSetPictureBoxImage();
+
+
+	}
+}
 	}
 

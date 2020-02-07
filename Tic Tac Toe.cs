@@ -20,7 +20,7 @@ namespace Tic_Tac_Toe
 	public partial class TicTacToe : Form
 	{
 		// WHen true = x turn; false = y turn
-
+		bool turn = true;
 		int turn_count;
 		int Turns = 0;
 		int[,] TicTacToeBoard = new int[1, 1];
@@ -49,20 +49,22 @@ namespace Tic_Tac_Toe
 		{
 			int sum = 0;
 
-			for (int column = 0; column < TicTacToeBoard.GetLength(1); row++)
+			for (int column = 0; column < TicTacToeBoard.GetLength(1); column++)
 			{
 				sum += TicTacToeBoard[columnEquals, column];
 			}
+			return sum;
 		}
 
 		private int PictureBoxRowSum(int rowEquals)
 		{
 			int sum = 0;
 
-			for (int column = 0; column < TicTacToeBoard.GetLength(1); column++)
+			for (int row = 0; row < TicTacToeBoard.GetLength(1); row++)
 			{
-				sum += TicTacToeBoard[rowEquals, column];
+				sum += TicTacToeBoard[rowEquals, row];
 			}
+			return sum;
 
 		}
 
@@ -87,8 +89,9 @@ namespace Tic_Tac_Toe
 			int columnTag = int.Parse(button.Tag.ToString().Substring(3, 1));
 
 			// Flip turn
-			
+			turn = !turn;
 		}
+
 
 		private void MassSetPictureBoxEnable(bool howToSet)
 		{

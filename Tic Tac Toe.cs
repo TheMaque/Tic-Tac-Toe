@@ -20,7 +20,12 @@ namespace Tic_Tac_Toe
 	public partial class TicTacToe : Form
 	{
 		// WHen true = x turn; false = y turn
-		bool turn = true;
+
+		int turn_count;
+		int Turns = 0;
+		int[,] TicTacToeBoard = new int[1, 1];
+
+		
 
 
 		public TicTacToe()
@@ -33,21 +38,35 @@ namespace Tic_Tac_Toe
 			// Close the program on click.
 			this.Close();
 		}
-		
+
 		private Bitmap SetImage()
 		{
 			return (turn) ? Properties.Resources.X : Properties.Resources.O;
 		}
 
-		static void ExtractRowAndColumn()
+		
+		private int PictureBoxColumnSum(int columnEquals)
 		{
+			int sum = 0;
+
+			for (int column = 0; column < TicTacToeBoard.GetLength(1); row++)
+			{
+				sum += TicTacToeBoard[columnEquals, column];
+			}
+		}
+
+		private int PictureBoxRowSum(int rowEquals)
+		{
+			int sum = 0;
+
+			for (int column = 0; column < TicTacToeBoard.GetLength(1); column++)
+			{
+				sum += TicTacToeBoard[rowEquals, column];
+			}
 
 		}
 
-		static void UpdateThe2DArray()
-		{
 
-		}
 
 		private void ButtonClicked(object sender, EventArgs e)
 		{
@@ -68,7 +87,7 @@ namespace Tic_Tac_Toe
 			int columnTag = int.Parse(button.Tag.ToString().Substring(3, 1));
 
 			// Flip turn
-			turn = !turn;
+			
 		}
 
 		private void MassSetPictureBoxEnable(bool howToSet)
@@ -82,27 +101,61 @@ namespace Tic_Tac_Toe
 		private void MassSetPictureBoxImage()
 		{
 			foreach (Control controlUsed in Controls)
-				{
+			{
 				if (controlUsed is PictureBox)
 				{
 					((PictureBox)controlUsed).Image = null;
 				}
 			}
-		
 
-	}
-	private void msNewGame_Click(object sender, EventArgs e)
-	{
-		// Enable first turn
-		turn = true;
+		}
 
-		
-		MassSetPictureBoxEnable(true);
+		private int SetCountForPlayer()
+		{
+			return (turn_count == 0) ? 1 : 0;
+		}
 
-		MassSetPictureBoxImage();
+		private int SetValue()
+		{
+			return (turn_count == 0) ? 10 : 100;
+		}
+
+		private bool CheckForWinner (int row, int column)
+		{
+			if (PictureBoxRowSum(row) == 30 || PictureBoxRowSum(row) == 300)
+			{
+				return true;
+			}
+			else if (PictureBoxColumnSum(column) == 30 || PictureBoxColumnSum(column) == 300)
+			{
+				return true;
+			}
+			else if (TicTacToeBoard[0, 0] + TicTacToeBoard[1, 2] + TicTacToeBoard[2, 2] == 30 || TicTacToeBoard[0, 0] + TicTacToeBoard[1, 2] + TicTacToeBoard[2, 2] == 300)
+			{
+				return true;
+			}
+			else if (TicTacToeBoard[0, 2] + TicTacToeBoard[1, 1] + TicTacToeBoard[2, 0] == 30 || TicTacToeBoard[0, 1] + TicTacToeBoard[1, 1] + TicTacToeBoard[2, 0] == 300)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		private void msNewGame_Click(object sender, EventArgs e)
+		{
+			// Enable first turn
+			turn = true;
 
 
+			MassSetPictureBoxEnable(true);
+
+			MassSetPictureBoxImage();
+
+
+
+		}
 	}
 }
-	}
 

@@ -25,7 +25,7 @@ namespace Tic_Tac_Toe
 		int Turns = 0;
 		int[,] TicTacToeBoard = new int[1, 1];
 
-		
+
 
 
 		public TicTacToe()
@@ -44,7 +44,7 @@ namespace Tic_Tac_Toe
 			return (turn) ? Properties.Resources.X : Properties.Resources.O;
 		}
 
-		
+
 		private int PictureBoxColumnSum(int columnEquals)
 		{
 			int sum = 0;
@@ -68,30 +68,52 @@ namespace Tic_Tac_Toe
 
 		}
 
-
+		private string TellTheWinner()
+		{
+			return (turn_count == 0) ? "X has won!" : " O has won!";
+		}
 
 		private void ButtonClicked(object sender, EventArgs e)
 		{
 			// Cast object to picturebox
 			PictureBox button = (PictureBox)sender;
 
-			// Declare if to cooresponding turn to change between O and X/
-			if (turn)
-				button.Image = SetImage();
-			else
-				button.Image = SetImage();
 
+
+			int row = int.Parse(button.Tag.ToString().Substring(1, 1));
+			int column = int.Parse(button.Tag.ToString().Substring(3, 1));
+			
+			// Declare if to cooresponding turn to change between O and X/
+			button.Image = SetImage();
+			TicTacToeBoard[row, column] = SetValue();
+			
 			// Disable button after being clicked.
 			button.Enabled = false;
 
 
-			int rowTag = int.Parse(button.Tag.ToString().Substring(1, 1));
-			int columnTag = int.Parse(button.Tag.ToString().Substring(3, 1));
 
-			// Flip turn
-			turn = !turn;
+			if (CheckForWinner(row, column))
+			{
+				MessageBox.Show(TellTheWinner());
+				MassSetPictureBoxEnable(false);
+			}
+			else if (Turns == 0)
+			{
+				MessageBox.Show("There has been a draw!");
+			}
+			else
+			{
+				turn_count = SetCountForPlayer();
+				Turns++;
+			}
+
+
 		}
 
+		private void TurnCountReset()
+		{
+			turn_count = 0;
+		}
 
 		private void MassSetPictureBoxEnable(bool howToSet)
 		{
@@ -123,7 +145,7 @@ namespace Tic_Tac_Toe
 			return (turn_count == 0) ? 10 : 100;
 		}
 
-		private bool CheckForWinner (int row, int column)
+		private bool CheckForWinner(int row, int column)
 		{
 			if (PictureBoxRowSum(row) == 30 || PictureBoxRowSum(row) == 300)
 			{
@@ -146,6 +168,7 @@ namespace Tic_Tac_Toe
 				return false;
 			}
 		}
+
 		private void msNewGame_Click(object sender, EventArgs e)
 		{
 			// Enable first turn
@@ -156,6 +179,9 @@ namespace Tic_Tac_Toe
 
 			MassSetPictureBoxImage();
 
+			TurnCountReset();
+
+			Turns = 0;
 
 
 		}

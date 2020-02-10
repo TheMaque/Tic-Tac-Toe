@@ -51,7 +51,7 @@ namespace Tic_Tac_Toe
 
 			for (int column = 0; column < TicTacToeBoard.GetLength(1); column++)
 			{
-				sum += TicTacToeBoard[columnEquals, column];
+				sum += TicTacToeBoard[column,columnEquals];
 			}
 			return sum;
 		}
@@ -61,9 +61,9 @@ namespace Tic_Tac_Toe
 		{
 			int sum = 0;
 
-			for (int row = 0; row < TicTacToeBoard.GetLength(1); row++)
+			for (int col = 0; col < TicTacToeBoard.GetLength(1); col++)
 			{
-				sum += TicTacToeBoard[rowEquals, row];
+				sum += TicTacToeBoard[rowEquals, col];
 			}
 			return sum;
 
@@ -164,11 +164,11 @@ namespace Tic_Tac_Toe
 			{
 				return true;
 			}
-			else if (TicTacToeBoard[0, 0] + TicTacToeBoard[1, 2] + TicTacToeBoard[2, 2] == 30 || TicTacToeBoard[0, 0] + TicTacToeBoard[1, 2] + TicTacToeBoard[2, 2] == 300)
+			else if (TicTacToeBoard[0, 0] + TicTacToeBoard[1, 1] + TicTacToeBoard[2, 2] == 30 || TicTacToeBoard[0, 0] + TicTacToeBoard[1, 1] + TicTacToeBoard[2, 2] == 300)
 			{
 				return true;
 			}
-			else if (TicTacToeBoard[0, 2] + TicTacToeBoard[1, 1] + TicTacToeBoard[2, 0] == 30 || TicTacToeBoard[0, 1] + TicTacToeBoard[1, 1] + TicTacToeBoard[2, 0] == 300)
+			else if (TicTacToeBoard[0, 2] + TicTacToeBoard[1, 1] + TicTacToeBoard[2, 0] == 30 || TicTacToeBoard[0, 2] + TicTacToeBoard[1, 1] + TicTacToeBoard[2, 0] == 300)
 			{
 				return true;
 			}
@@ -183,7 +183,7 @@ namespace Tic_Tac_Toe
 		{
 			for (int row = 0; row < TicTacToeBoard.GetLength(0); row++)
 			{
-				for (int column = 0; column < TicTacToeBoard.GetLength(0); column++)
+				for (int column = 0; column < TicTacToeBoard.GetLength(1); column++)
 				{
 					TicTacToeBoard[row, column] = 0;
 				}

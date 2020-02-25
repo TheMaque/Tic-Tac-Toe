@@ -163,11 +163,11 @@ namespace Tic_Tac_Toe
 			{
 				return true;
 			}
-			else if (TicTacToeBoard[0, 0] + TicTacToeBoard[1, 1] + TicTacToeBoard[2, 2] == 30 || TicTacToeBoard[0, 0] + TicTacToeBoard[1, 1] + TicTacToeBoard[2, 2] == 300)
+			else if (DiagCheckOne() == 30 || DiagCheckOne() == 300)
 			{
 				return true;
 			}
-			else if (TicTacToeBoard[0, 2] + TicTacToeBoard[1, 1] + TicTacToeBoard[2, 0] == 30 || TicTacToeBoard[0, 2] + TicTacToeBoard[1, 1] + TicTacToeBoard[2, 0] == 300)
+			else if (DiagCheckTwo() == 30 || DiagCheckTwo() == 300)
 			{
 				return true;
 			}
@@ -175,6 +175,16 @@ namespace Tic_Tac_Toe
 			{
 				return false;
 			}
+		}
+
+		private int DiagCheckOne()
+		{
+			 return TicTacToeBoard[0, 0] + TicTacToeBoard[1, 1] + TicTacToeBoard[2, 2];
+		}
+
+		private int DiagCheckTwo()
+		{
+			return TicTacToeBoard[0, 2] + TicTacToeBoard[1, 1] + TicTacToeBoard[2, 0];
 		}
 
 		//Reset the array when game is reset

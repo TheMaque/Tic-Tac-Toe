@@ -17,14 +17,13 @@ namespace Tic_Tac_Toe
 	 * 
 	 * Purpose: A tic tac toe program that takes user input and changes pictureboxes corresponding to the users choice.
 	 */
+
 	public partial class TicTacToe : Form
 	{
 		// Global Variables
 		int turn_count;
 		int Turns = 0;
 		int[,] TicTacToeBoard = new int[3, 3];
-
-
 
 
 		public TicTacToe()
@@ -201,7 +200,6 @@ namespace Tic_Tac_Toe
 
 			// Reset turn to 0
 			Turns = 0;
-
 
 		}
 	}

@@ -22,7 +22,6 @@ namespace Tic_Tac_Toe
 		// WHen true = x turn; false = y turn
 		bool turn = true;
 
-
 		public TicTacToe()
 		{
 			InitializeComponent();
